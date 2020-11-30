@@ -23,29 +23,32 @@ img.onload = function() {
 
 function pick(x, y) {
     let pixel = ctx.getImageData(x, y, 1, 1)
-    let rgb = pixel.data
+    let rgba = pixel.data
     
-    return rgb
+    return rgba
 }
 
-function rgbString(rgb) {
-    return 'rgb(' + rgb[0] + ', ' + 
-                    rgb[1] + ', ' +
-                    rgb[2] + ')'
+function rgbaString(rgba) {
+    return 'rgba(' + rgba[0] + ', ' + 
+                    rgba[1] + ', ' +
+                    rgba[2] + ', ' +
+                    rgba[3] + ')'
 }
 
 canvas.addEventListener('click', function(e) {
     let x = e.offsetX,
         y = e.offsetY
 
-    let rgb = pick(x, y)
+    let rgba = pick(x, y)
 
     let currentColor = document.getElementsByClassName('current-color')[0]
-    currentColor.style.background = rgbString(rgb)
+    currentColor.style.background = rgbaString(rgba)
 
-    let rgbValue = document.getElementsByClassName('rgb-value')[0]
-    rgbValue.innerHTML = rgbString(rgb)
+    let rgbaValue = document.getElementsByClassName('rgba-value')[0]
+    rgbaValue.innerHTML = rgbaString(rgba)
 })
 
 let defaultSrc = 'https://i.vimeocdn.com/video/703876203_1280x720.jpg'
-loadImageByURL(defaultSrc)
+//loadImageByURL(defaultSrc)
+
+//transparent image example: https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png
