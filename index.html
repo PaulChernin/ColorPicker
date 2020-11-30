@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Color Picker</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Color Picker</h1>
+        <div class="columns">
+            <div>
+                <div>
+                    <canvas height="380" width="540" id="canvas"></canvas>
+                </div>
+                <!-- <div class="image-container">
+                    <img src="./image.jpg" alt="">
+                </div> -->
+                <!-- <input type="file"> -->
+                <div class="urlInput">
+                    <label for="urlInput">Paste link</label>
+                    <input type="url" id="urlInput">
+                    <button id="urlSubmitButton">Open</button>
+                </div>
+            </div>
+            <div class="color-block">
+                <div class="current-color"></div>
+                <div class="palette">
+                    <div class="palette__color"></div>
+                    <div class="palette__color"></div>
+                    <div class="palette__color"></div>
+                    <div class="palette__color"></div>
+                </div>
+            </div>
+            <div>
+                <h3>Selected color</h3>
+                <p>HEX: #f23f34</p>
+                <p class="rgb-value">RGB: 32, 34, 37</p>
+                <p>CMYK: 14%, 8%, 0%, 85%</p>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
