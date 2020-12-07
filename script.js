@@ -9,17 +9,34 @@ function loadImageByURL(url) {
     img.src = url
 }
 
-let urlInput = document.getElementById('urlInput')
-let urlSubmitButton = document.getElementById('urlSubmitButton')
+// let urlInput = document.getElementById('urlInput')
+// let urlSubmitButton = document.getElementById('urlSubmitButton')
 
-urlSubmitButton.addEventListener('click', function() {
-    let url = urlInput.value
-    loadImageByURL(url)
-})
+// urlSubmitButton.addEventListener('click', function() {
+//     let url = urlInput.value
+//     loadImageByURL(url)
+// })
 
 img.onload = function() {
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 }
+
+let fileInput = document.getElementById('fileInput')
+fileInput.addEventListener('change', handleFile)
+
+function handleFile(event) {
+    let file = event.target.files[0]
+    console.log(file)
+    let reader = new FileReader()
+
+    reader.onload = function(event) {
+        img.src = event.target.result
+    }
+
+    reader.readAsDataURL(file)
+
+}
+
 
 function pick(x, y) {
     let pixel = ctx.getImageData(x, y, 1, 1)
@@ -83,7 +100,7 @@ canvas.addEventListener('click', function(e) {
     showColor(color)
 })
 
-let defaultSrc = 'https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png'
-loadImageByURL(defaultSrc)
-// https://i.vimeocdn.com/video/703876203_1280x720.jpg
+// let defaultSrc = 'https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png'
+let defaultSrc = 'https://i.vimeocdn.com/video/703876203_1280x720.jpg'
+//loadImageByURL(defaultSrc)
 
