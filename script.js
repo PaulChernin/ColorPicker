@@ -80,27 +80,49 @@ function toCmyk(arr) {
     return `CMYK: ${c}%, ${m}%, ${y}%, ${k}%`
 }
 
-function showColor(color) {
-    let currentColor = document.getElementsByClassName('current-color')[0]
-    currentColor.style.background = toRgba(color)
 
+function showColor(color) {
+    let currentColorBlock = document.getElementsByClassName('current-color')[0]
+    currentColorBlock.style.background = toRgba(color)
+    
     let rgbaValue = document.getElementsByClassName('rgba-value')[0]
     rgbaValue.innerHTML = toRgba(color)
     let hexValue = document.getElementsByClassName('hex-value')[0]
     hexValue.innerHTML = toHex(color)
     let cmykValue = document.getElementsByClassName('cmyk-value')[0]
     cmykValue.innerHTML = toCmyk(color)
+    
 }
+
+function addColorToPalette(color) {
+    if (color === null) return
+    
+    let palette = document.getElementById('palette')
+    let paletteColor = document.createElement('DIV')
+    paletteColor.classList.add('palette__color')
+    paletteColor.style.background = toRgba(color)
+    palette.prepend(paletteColor)
+
+    if (palette.children.length > 5) {
+        console.log('o')
+        palette.removeChild(palette.lastElementChild)
+    }
+
+}
+
+let currentColor = null
 
 canvas.addEventListener('click', function(e) {
     let x = e.offsetX,
-        y = e.offsetY
-
+    y = e.offsetY
+    
+    addColorToPalette(currentColor)
     let color = pick(x, y)
     showColor(color)
+    currentColor = color
 })
 
 // let defaultSrc = 'https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png'
-let defaultSrc = 'https://i.vimeocdn.com/video/703876203_1280x720.jpg'
+//let defaultSrc = 'https://i.vimeocdn.com/video/703876203_1280x720.jpg'
 //loadImageByURL(defaultSrc)
 
