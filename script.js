@@ -91,35 +91,35 @@ function showColor(color) {
     hexValue.innerHTML = toHex(color)
     let cmykValue = document.getElementsByClassName('cmyk-value')[0]
     cmykValue.innerHTML = toCmyk(color)
-    
 }
+
+const MAX_COLOR_BLOCKS = 8
+
+let nextColorBlock = 1
 
 function addColorToPalette(color) {
     if (color === null) return
     
-    let palette = document.getElementById('palette')
-    let paletteColor = document.createElement('DIV')
-    paletteColor.classList.add('palette__color')
-    paletteColor.style.background = toRgba(color)
-    palette.prepend(paletteColor)
-
-    if (palette.children.length > 5) {
-        console.log('o')
-        palette.removeChild(palette.lastElementChild)
+    colorBlock = document.querySelector('#palette :nth-child(' + nextColorBlock + ')')
+    colorBlock.style.background = toRgba(color)
+    
+    nextColorBlock++
+    
+    if (nextColorBlock == MAX_COLOR_BLOCKS + 1) {
+        nextColorBlock = 1
     }
-
 }
 
-let currentColor = null
+//let currentColor = null
 
 canvas.addEventListener('click', function(e) {
     let x = e.offsetX,
     y = e.offsetY
     
-    addColorToPalette(currentColor)
     let color = pick(x, y)
     showColor(color)
-    currentColor = color
+    addColorToPalette(color)
+    //currentColor = color
 })
 
 // let defaultSrc = 'https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png'
