@@ -1,21 +1,13 @@
 let img = new Image()
 //img.crossOrigin = "Anonymous"
 
-let canvas = document.getElementById('canvas')
-let ctx = canvas.getContext('2d')
+const canvas = document.getElementById('canvas')
+const ctx = canvas.getContext('2d')
 
 
 function loadImageByURL(url) {
     img.src = url
 }
-
-// let urlInput = document.getElementById('urlInput')
-// let urlSubmitButton = document.getElementById('urlSubmitButton')
-
-// urlSubmitButton.addEventListener('click', function() {
-//     let url = urlInput.value
-//     loadImageByURL(url)
-// })
 
 img.onload = function() {
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
@@ -34,19 +26,16 @@ function handleFile(event) {
     }
 
     reader.readAsDataURL(file)
-
 }
-
 
 function pick(x, y) {
     let pixel = ctx.getImageData(x, y, 1, 1)
-    let rgba = pixel.data
     
-    return rgba
+    return pixel.data
 }
 
-function toRgba(arr) {
-    return 'rgba(' + arr.join() + ')'
+function toRgb(arr) {
+    return 'rgb(' + arr.slice(0, 3).join() + ')'
 }
 
 function to2digitHex(x) {
@@ -80,13 +69,12 @@ function toCmyk(arr) {
     return `CMYK: ${c}%, ${m}%, ${y}%, ${k}%`
 }
 
-
 function showColor(color) {
     let currentColorBlock = document.getElementsByClassName('current-color')[0]
-    currentColorBlock.style.background = toRgba(color)
+    currentColorBlock.style.background = toRgb(color)
     
-    let rgbaValue = document.getElementsByClassName('rgba-value')[0]
-    rgbaValue.innerHTML = toRgba(color)
+    let rgbValue = document.getElementsByClassName('rgb-value')[0]
+    rgbValue.innerHTML = toRgb(color)
     let hexValue = document.getElementsByClassName('hex-value')[0]
     hexValue.innerHTML = toHex(color)
     let cmykValue = document.getElementsByClassName('cmyk-value')[0]
@@ -101,7 +89,7 @@ function addColorToPalette(color) {
     if (color === null) return
     
     colorBlock = document.querySelector('#palette :nth-child(' + nextColorBlock + ')')
-    colorBlock.style.background = toRgba(color)
+    colorBlock.style.background = toRgb(color)
     
     nextColorBlock++
     
@@ -110,8 +98,6 @@ function addColorToPalette(color) {
     }
 }
 
-//let currentColor = null
-
 canvas.addEventListener('click', function(e) {
     let x = e.offsetX,
     y = e.offsetY
@@ -119,10 +105,26 @@ canvas.addEventListener('click', function(e) {
     let color = pick(x, y)
     showColor(color)
     addColorToPalette(color)
-    //currentColor = color
 })
 
-// let defaultSrc = 'https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png'
-//let defaultSrc = 'https://i.vimeocdn.com/video/703876203_1280x720.jpg'
-//loadImageByURL(defaultSrc)
+const colorBlocks = Array.from(document.getElementById('palette').children)
 
+function colorStringToArray(str) {
+    let array = str.split(', ')
+    array[0] = array[0].substr(4)
+    array[2] = array[2].substr(0, array[2].length - 1)
+    return array
+}
+
+colorBlocks.forEach(element => {
+    element.addEventListener('click', e => {
+        let el = e.toElement
+        let colorString = el.style.backgroundColor
+
+        let color = colorStringToArray(colorString)
+        
+        showColor(color)
+        //let currentColorBlock = document.getElementsByClassName('current-color')[0]
+        //currentColorBlock.style.background = block.style.background
+    })
+});
