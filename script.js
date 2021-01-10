@@ -3,13 +3,22 @@ let img = new Image()
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
-
-function loadImageByURL(url) {
-    img.src = url
-}
+// function loadImageByURL(url) {
+//     img.src = url
+// }
 
 img.onload = function() {
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+    let width, height
+
+    if (this.width / this.height > canvas.width / canvas.height) {
+        width = canvas.width
+        height = this.height * width / this.width
+    } else {
+        height = canvas.height
+        width = this.width * height / this.height
+    }
+    
+    ctx.drawImage(img, 0, 0, width, height)
 }
 
 let fileInput = document.getElementById('fileInput')
@@ -18,6 +27,7 @@ fileInput.addEventListener('change', handleFile)
 function handleFile(event) {
     let file = event.target.files[0]
     console.log(file)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     let reader = new FileReader()
 
     reader.onload = function(event) {
