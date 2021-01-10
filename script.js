@@ -1,5 +1,4 @@
 let img = new Image()
-//img.crossOrigin = "Anonymous"
 
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
@@ -124,7 +123,5 @@ colorBlocks.forEach(element => {
         let color = colorStringToArray(colorString)
         
         showColor(color)
-        //let currentColorBlock = document.getElementsByClassName('current-color')[0]
-        //currentColorBlock.style.background = block.style.background
     })
 });

@@ -22,30 +22,6 @@ h1 {
     flex-direction: row;
     justify-content: center;
 }
-.image-container {
-    width: 540px;
-    height: 380px;
-    border: 1px solid black;
-    margin-bottom: 25px;
-}
-img {
-    max-width: 100%;
-    max-height: 100%;
-}
-.button::-webkit-file-upload-button {
-    display: none;
-    visibility: hidden;
-}
-.button {
-    margin: 0 auto;
-    text-align: center;
-    font-size: 25px;
-    color: white;
-    background: #202225;
-    border: 1px solid black;
-    padding: 16px 52px;
-    margin-bottom: 10px;
-}
 canvas {
     cursor: pointer;
 }
@@ -71,6 +47,9 @@ canvas {
     background: #646056;
     cursor: pointer;
 }
+.color-info {
+    width: 250px;
+}
 h3 {
     color: white;
     text-decoration: underline;
@@ -82,7 +61,4 @@ p, label {
     color: white;
     font-size: 20px;
     line-height: 26px;
-}
-label {
-    margin: 10px 10px 0 0;
 }
