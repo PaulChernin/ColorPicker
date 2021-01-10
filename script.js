@@ -112,7 +112,8 @@ function colorStringToArray(str) {
     let array = str.split(', ')
     array[0] = array[0].substr(4)
     array[2] = array[2].substr(0, array[2].length - 1)
-    return array
+    let numberArray = array.map(el => parseInt(el))
+    return numberArray
 }
 
 colorBlocks.forEach(element => {
@@ -121,7 +122,7 @@ colorBlocks.forEach(element => {
         let colorString = el.style.backgroundColor
 
         let color = colorStringToArray(colorString)
-        
+
         showColor(color)
     })
 });
