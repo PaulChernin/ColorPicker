@@ -65,12 +65,12 @@ function toCmyk(arr) {
     if (_k == 1) {
         return 'CMYK: 0%, 0%, 0%, 100%'
     }
-
+    
     let c = Math.round(100 * (1 - r - _k) / (1 - _k))
     let m = Math.round(100 * (1 - g - _k) / (1 - _k))
     let y = Math.round(100 * (1 - b - _k) / (1 - _k))
-    let k = Math.round(_k)
-
+    let k = Math.round(100 * _k)
+    
     return `CMYK: ${c}%, ${m}%, ${y}%, ${k}%`
 }
 
@@ -134,4 +134,4 @@ colorBlocks.forEach(element => {
 });
 
 const defaultImageSrc = './default.jpg'
-img.src = defaultImageSrc
+//img.src = defaultImageSrc
