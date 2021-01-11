@@ -3,10 +3,6 @@ let img = new Image()
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
-// function loadImageByURL(url) {
-//     img.src = url
-// }
-
 img.onload = function() {
     let width, height
 
@@ -136,3 +132,6 @@ colorBlocks.forEach(element => {
         showColor(color)
     })
 });
+
+const defaultImageSrc = './default.jpg'
+img.src = defaultImageSrc
